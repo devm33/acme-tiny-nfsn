@@ -52,13 +52,15 @@ fi
 wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
 
 ## Prep challenge directory
-if [ -d /home/public ]; then # on nfsn
-  CDIR=/home/public/.well-known/acme-challenge
-else
-  CDIR=acme-challenge
-fi
+CDIR=/home/public/.well-known/acme-challenge
 mkdir -p $CDIR
 
 ## Submit CSR and get cert
 python acme_tiny.py --account-key account.key --csr csr.pem \
   --acme-dir $CDIR > cert.pem
+
+## Get chain cert (warning: this could change)
+wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
+
+## Add certificates to nfsn
+cat csr.pem cert.pem chain.pem | nfsn -i 'set-tls'
