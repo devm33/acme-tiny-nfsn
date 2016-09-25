@@ -18,35 +18,33 @@ if [ ! -f domain.csr ]; then
   if [ ! -f $CNF ]; then # maybe testing on osx
     CNF=/System/Library/OpenSSL/openssl.cnf
     if [ ! -f $CNF ]; then
-      echo 'Error: Cant find openssl.cnf, exiting'
+      echo 'Error: Cant find openssl.cnf'
       exit 1
     fi
   fi
+
+  cp $CNF openssl.cnf
 
   if [ ! -f domains.conf ]; then
     echo 'Error: Cant find domains.conf, please place in ./data/domain.conf'
     exit 1
   fi
+  if [ ! "$(cat domains.conf)" ]; then
+    echo 'Error: domains.conf is empty'
+    exit 1
+  fi
 
-  DOMAINS='DNS:'
-  while read line; do
-    echo $line
-  done <domains.conf
+  FDOMAIN=$(head -n1 domains.conf)
+  DOMAINS="$(sed 's/^/DNS:/' domains.conf | paste -s -d, -)"
 
+  echo '[SAN]' >> openssl.cnf
+  echo "subjectAltName=$DOMAINS" >> openssl.cnf
 
+  openssl req -new \
+    -keyout domain.key.pem -newkey rsa:4096 -sha256 -nodes \
+    -subj '/CN=devm33.com' -reqexts SAN \
+    -config openssl.cnf \
+    -out domain.csr #.der -outform DER
 fi
-echo "WIP"
-exit
 
-
-cp $CNF openssl.cnf
-
-echo '[SAN]' >> openssl.cnf
-echo 'subjectAltName=DNS:devm33.com,DNS:www.devm33.com' >> openssl.cnf
-
-openssl req -new \
-  -keyout domain.key.pem -newkey rsa:4096 -sha256 -nodes \
-  -subj '/CN=devm33.com' -reqexts SAN \
-  -config openssl.cnf \
-  -out domain.csr #.der -outform DER
 
