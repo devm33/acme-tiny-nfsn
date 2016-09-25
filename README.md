@@ -1,6 +1,6 @@
-# LetsEncrypt-NSFN
+# ACME-tiny-NFSN
 
-Automating LetsEncrypt on NearlyFreeSpeech.net
+Automating ACME protocol with LetsEncrypt.org for hosting on NearlyFreeSpeech.net
 
 ## TODO
 
@@ -29,7 +29,7 @@ Automate: <https://faq.nearlyfreespeech.net/section/programming/cron#cron>
 
 ## Dependencies
 
-### <LetsEncrypt.org>
+### [Let's Encrypt](https://letsencrypt.org/)
 
 Obviously, dependent as the CA. In addition to dependency points in acme_tiny,
 this script also depends on the chain certificate Let's Encrypt is using,
