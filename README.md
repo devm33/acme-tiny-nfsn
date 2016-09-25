@@ -11,11 +11,11 @@ Automating LetsEncrypt on NearlyFreeSpeech.net
 
 ## Configuration
 
-Add your domains to `domains.conf`:
+Add your CSR config to `data/csr.conf`, e.g.
 
 ```
-devm33.com
-www.devm33.com
+/C=US/emailAddress=devm33.com@respectmyprivacy.com/CN=devm33.com
+DNS:devm33.com,DNS:www.devm33.com
 ````
 
 ## Usage
@@ -35,3 +35,10 @@ Taken from <https://github.com/diafygi/acme-tiny>
 
 Relies on being available at this location
 <https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py>
+
+### `nfsn`
+
+Command available on NearlyFreeSpeech server. See FAQ on TLS usage:
+
+- <https://faq.nearlyfreespeech.net/full/tlssetup#tlssetup>
+- <https://members.nearlyfreespeech.net/wiki/HowTo/EnableTLS>

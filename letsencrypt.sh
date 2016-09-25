@@ -13,7 +13,7 @@ fi
 
 ## Create CSR and key once
 if [ ! -f domain.csr ]; then
-
+  # Get system ssl config
   CNF=/etc/ssl/openssl.cnf
   if [ ! -f $CNF ]; then # maybe testing on osx
     CNF=/System/Library/OpenSSL/openssl.cnf
@@ -22,27 +22,28 @@ if [ ! -f domain.csr ]; then
       exit 1
     fi
   fi
-
   cp $CNF openssl.cnf
 
-  if [ ! -f domains.conf ]; then
-    echo 'Error: Cant find domains.conf, please place in ./data/domain.conf'
+  # Get user config
+  if [ ! -f csr.conf ]; then
+    echo 'Error: Cant find csr.conf, please place in ./data/csr.conf'
     exit 1
   fi
-  if [ ! "$(cat domains.conf)" ]; then
-    echo 'Error: domains.conf is empty'
+  SUBJECT="$(head -1 csr.conf)"
+  DOMAINS="$(tail -1 csr.conf)"
+  if [[ -z "$SUBJECT" ]] || [[ -z "$DOMAINS" ]]; then
+    echo 'Error: csr.conf is incomplete'
     exit 1
   fi
 
-  FDOMAIN=$(head -n1 domains.conf)
-  DOMAINS="$(sed 's/^/DNS:/' domains.conf | paste -s -d, -)"
-
+  # Add user confing to system config
   echo '[SAN]' >> openssl.cnf
   echo "subjectAltName=$DOMAINS" >> openssl.cnf
 
+  # Create CSR and key
   openssl req -new \
     -keyout domain.key.pem -newkey rsa:4096 -sha256 -nodes \
-    -subj '/CN=devm33.com' -reqexts SAN \
+    -subj "$SUBJECT" -reqexts SAN \
     -config openssl.cnf \
     -out domain.csr #.der -outform DER
 fi
