@@ -1,6 +1,6 @@
-# ACME-tiny-NFSN
+# acme-tiny-nfsn
 
-Automating ACME protocol with LetsEncrypt.org for hosting on NearlyFreeSpeech.net
+Automating getting an SSL certificate with the ACME protocol with LetsEncrypt.org for hosting on NearlyFreeSpeech.net
 
 ## TODO
 
@@ -20,12 +20,8 @@ DNS:devm33.com,DNS:www.devm33.com
 
 ## Usage
 
-Run
-```sh
-./letsencrypt.sh
-```
-
-Automate: <https://faq.nearlyfreespeech.net/section/programming/cron#cron>
+- Run: `./letsencrypt.sh`
+- Automate: <https://faq.nearlyfreespeech.net/section/programming/cron#cron>
 
 ## Dependencies
 
@@ -37,16 +33,16 @@ currently Let’s Encrypt Authority X3 (IdenTrust cross-signed).
 
 Warning this could change, check here: <https://letsencrypt.org/certificates/>
 
-### `acme_tiny.py`
+### [acme_tiny](https://github.com/diafygi/acme-tiny)
 
-Taken from <https://github.com/diafygi/acme-tiny>
+Script that negotiates certificate with LetsEncrypt using ACME protocol.
 
-Relies on being available at this location
+Expected to be available at this location
 <https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py>
 
-### `nfsn`
+### nfsn
 
-Command available on NearlyFreeSpeech server. See FAQ on TLS usage:
+Command available on NearlyFreeSpeech servers. See FAQ on TLS usage:
 
 - <https://faq.nearlyfreespeech.net/full/tlssetup#tlssetup>
 - <https://members.nearlyfreespeech.net/wiki/HowTo/EnableTLS>
