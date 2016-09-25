@@ -12,7 +12,7 @@ if [ ! -f account.key ]; then
 fi
 
 ## Create CSR and key once
-if [ ! -f domain.csr ]; then
+if [ ! -f csr.pem ]; then
   # Get system ssl config
   CNF=/etc/ssl/openssl.cnf
   if [ ! -f $CNF ]; then # maybe testing on osx
@@ -42,10 +42,23 @@ if [ ! -f domain.csr ]; then
 
   # Create CSR and key
   openssl req -new \
-    -keyout domain.key.pem -newkey rsa:4096 -sha256 -nodes \
+    -keyout csr.key.pem -newkey rsa:4096 -sha256 -nodes \
     -subj "$SUBJECT" -reqexts SAN \
     -config openssl.cnf \
-    -out domain.csr #.der -outform DER
+    -out csr.pem
 fi
 
+## Get latest acme_tiny script
+wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
 
+## Prep challenge directory
+if [ -d /home/public ]; then # on nfsn
+  CDIR=/home/public/.well-known/acme-challenge
+else
+  CDIR=acme-challenge
+fi
+mkdir -p $CDIR
+
+## Submit CSR and get cert
+python acme_tiny.py --account-key account.key --csr csr.pem \
+  --acme-dir $CDIR > cert.pem
