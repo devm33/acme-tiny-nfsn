@@ -4,9 +4,10 @@ Automating LetsEncrypt on NearlyFreeSpeech.net
 
 ## TODO
 
-<https://faq.nearlyfreespeech.net/full/tlssetup#tlssetup>
+TODO: test it...
 
-<https://members.nearlyfreespeech.net/wiki/HowTo/EnableTLS>
+- <https://faq.nearlyfreespeech.net/full/tlssetup#tlssetup>
+- <https://members.nearlyfreespeech.net/wiki/HowTo/EnableTLS>
 
 ## Configuration
 
@@ -27,6 +28,14 @@ Run
 Automate: <https://faq.nearlyfreespeech.net/section/programming/cron#cron>
 
 ## Dependencies
+
+### <LetsEncrypt.org>
+
+Obviously, dependent as the CA. In addition to dependency points in acme_tiny,
+this script also depends on the chain certificate Let's Encrypt is using,
+currently Let’s Encrypt Authority X3 (IdenTrust cross-signed).
+
+Warning this could change, check here: <https://letsencrypt.org/certificates/>
 
 ### `acme_tiny.py`
 
