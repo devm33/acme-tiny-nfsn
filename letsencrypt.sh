@@ -15,12 +15,9 @@ fi
 if [ ! -f csr.pem ]; then
   # Get system ssl config
   CNF=/etc/ssl/openssl.cnf
-  if [ ! -f $CNF ]; then # maybe testing on osx
-    CNF=/System/Library/OpenSSL/openssl.cnf
-    if [ ! -f $CNF ]; then
-      echo 'Error: Cant find openssl.cnf'
-      exit 1
-    fi
+  if [ ! -f $CNF ]; then
+    echo 'Error: Cant find openssl.cnf'
+    exit 1
   fi
   cp $CNF openssl.cnf
 
