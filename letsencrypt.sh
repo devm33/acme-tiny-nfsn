@@ -59,5 +59,8 @@ python acme_tiny.py --account-key account.key --csr csr.pem \
 ## Get chain cert (warning: this could change)
 wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
 
+## Get root cert
+wget https://letsencrypt.org/certs/isrgrootx1.pem
+
 ## Add certificates to nfsn
-cat csr.pem cert.pem chain.pem | nfsn -i 'set-tls'
+cat csr.pem cert.pem chain.pem root.pem | nfsn -i 'set-tls'
