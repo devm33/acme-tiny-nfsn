@@ -54,7 +54,7 @@ mkdir -p $CDIR
 
 ## Submit CSR and get cert
 python acme_tiny.py --account-key account.key --csr csr.pem \
-  --acme-dir $CDIR > cert.pem
+  --acme-dir $CDIR > cert.pem || exit
 
 ## Get chain cert (warning: this could change)
 wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
