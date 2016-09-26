@@ -46,7 +46,7 @@ if [ ! -f csr.pem ]; then
 fi
 
 ## Get latest acme_tiny script
-wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py
+wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py -O acme_tiny.py
 
 ## Prep challenge directory
 CDIR=/home/public/.well-known/acme-challenge
