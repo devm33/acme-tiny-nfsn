@@ -63,4 +63,4 @@ wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
 wget https://letsencrypt.org/certs/isrgrootx1.pem -O root.pem
 
 ## Add certificates to nfsn
-cat csr.pem cert.pem chain.pem root.pem | nfsn -i 'set-tls'
+cat csr.key.pem cert.pem chain.pem root.pem | nfsn -i 'set-tls'
