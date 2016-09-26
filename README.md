@@ -2,13 +2,6 @@
 
 Automating getting an SSL certificate with the ACME protocol with LetsEncrypt.org for hosting on NearlyFreeSpeech.net
 
-## TODO
-
-TODO: test it...
-
-- <https://faq.nearlyfreespeech.net/full/tlssetup#tlssetup>
-- <https://members.nearlyfreespeech.net/wiki/HowTo/EnableTLS>
-
 ## Configuration
 
 Add your CSR config to `data/csr.conf`, e.g.
