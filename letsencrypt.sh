@@ -46,21 +46,21 @@ if [ ! -f csr.pem ]; then
 fi
 
 ## Get latest acme_tiny script
-wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py -O acme_tiny.py
+wget -q https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py -O acme_tiny.py
 
 ## Prep challenge directory
 CDIR=/home/public/.well-known/acme-challenge
 mkdir -p $CDIR
 
 ## Submit CSR and get cert
-python acme_tiny.py --account-key account.key --csr csr.pem \
+python acme_tiny.py --quiet --account-key account.key --csr csr.pem \
   --acme-dir $CDIR > cert.pem || exit
 
 ## Get chain cert (warning: this could change)
-wget https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
+wget -q https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem -O chain.pem
 
 ## Get root cert
-wget https://letsencrypt.org/certs/isrgrootx1.pem -O root.pem
+wget -q https://letsencrypt.org/certs/isrgrootx1.pem -O root.pem
 
 ## Add certificates to nfsn
 cat csr.key.pem cert.pem chain.pem root.pem | nfsn -i 'set-tls'
