@@ -53,7 +53,7 @@ CDIR=/home/public/.well-known/acme-challenge
 mkdir -p $CDIR
 
 ## Submit CSR and get cert
-python acme_tiny.py --quiet --account-key account.key --csr csr.pem \
+python2 acme_tiny.py --quiet --account-key account.key --csr csr.pem \
   --acme-dir $CDIR > cert.pem || exit
 
 ## Get chain cert (warning: this could change)
