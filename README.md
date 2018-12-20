@@ -16,6 +16,8 @@ DNS:devm33.com,DNS:www.devm33.com
 - Run: `./letsencrypt.sh`
 - Automate: <https://faq.nearlyfreespeech.net/section/programming/cron#cron>
 
+Note that if you don't already have https set up, or you've let your certificate expire, you'll need to set "Canonical HTTPS" to "off" in the NearlyFreeSpeech settings (Config Information -> Canonical URL -> Edit) so LetsEncrypt can successfully access http://<your_domain>/.well-known/acme-challenge/
+
 ## Dependencies
 
 ### [Let's Encrypt](https://letsencrypt.org/)
